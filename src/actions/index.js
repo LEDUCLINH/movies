@@ -23,9 +23,13 @@ const fetchDiscover = (data) => {
   }
 }
 
-export const asyncFetchDiscover = () => {
+export const asyncFetchDiscover = (page) => {
   return (dispatch) => {
-    return api.get('discover/movie').then(res => {
+    return api.get('discover/movie', {
+     params: {
+       page: page
+     }
+    }).then(res => {
       dispatch(fetchDiscover(res.data.results))
     })
   }
@@ -105,15 +109,24 @@ const fetchGenre = (data) => {
   }
 }
 
-export const asyncFetchGenre = (genre__id) => {
+export const asyncFetchGenre = (genre__id, page__number) => {
   return (dispatch) => {
     return api.get(`discover/movie`, {
       params: {
-        with_genres: genre__id
+        with_genres: genre__id,
+        page: page__number
       }
     })
     .then(res => {
       dispatch(fetchGenre(res.data.results))
     })
+  }
+}
+
+export const Active = (active) => {
+  console.log(active)
+  return {
+    type: TYPES.ACTIVE,
+    active
   }
 }

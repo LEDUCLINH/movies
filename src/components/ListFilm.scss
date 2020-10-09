@@ -9,10 +9,12 @@
     img {
       width: 100%;
       border-radius: 10px;
+      height: 25rem;
     }
     &:hover {
       img {
         box-shadow: 0 14px 40px var(--shadow-dark);
+        transform: scale(1.04);
       }
     }
   }

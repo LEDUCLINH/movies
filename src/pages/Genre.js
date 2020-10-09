@@ -1,23 +1,52 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import Container from '../components/Container'
 import './Genre.scss'
 import { useDispatch, useSelector } from 'react-redux'
-import { asyncFetchGenre } from '../actions'
+import { asyncFetchGenre, Active } from '../actions'
 import { useParams } from 'react-router-dom'
 import ListFilm from '../components/ListFilm'
 
 const Genre = () => {
+  const [data, setData] = useState([])
+  const [page, setPage] = useState(1)
   const dispatch = useDispatch()
   const genre = useSelector(state => state.genre)
   const param = useParams()
   useEffect(() => {
-    dispatch(asyncFetchGenre(param.id))
-  }, [dispatch, param.id])
+    dispatch(asyncFetchGenre(param.id, page))
+    dispatch(Active(true))
+  }, [dispatch, param.id, page])
+
+  useEffect(() => {
+    setPage(1)
+    setData([])
+  }, [param.id])
+
+  useEffect(() => {
+    setData(data => [...data, ...genre])
+  }, [genre])
+
+  const pageLoad = useCallback(() => {
+    const check = window.scrollY + window.innerHeight >= document.documentElement.scrollHeight
+    if (!!check) {
+      setPage(page + 1)
+    }
+  }, [page])
+
+  useEffect(() => {
+    window.addEventListener('scroll', pageLoad)
+    return () => window.removeEventListener('scroll', pageLoad)
+  }, [page, pageLoad])
+  
+  useEffect(() => {
+    document.title = "Movies - Genre"
+  }, [])
+
   return (
     <div className="genre">
       <Container>
         <div className="genre__main">
-          <ListFilm movies={genre} />
+          <ListFilm movies={data} />
         </div>
       </Container>
     </div>

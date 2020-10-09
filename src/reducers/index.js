@@ -5,6 +5,7 @@ import movieReducer from './movie.reducer'
 import recommendReducer from './recommend.reducer'
 import personReducer from './person.reducer'
 import genreReducer from './genre.reducer'
+import activeReducer from './active.reducer'
 
 export default combineReducers({
     genRes: genResReducer,
@@ -12,5 +13,6 @@ export default combineReducers({
     movie: movieReducer,
     recommend: recommendReducer,
     person: personReducer,
-    genre: genreReducer
+    genre: genreReducer,
+    active: activeReducer
 })

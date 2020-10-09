@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { asyncFetchMOvie, asyncFetchCast } from '../actions'
+import { asyncFetchMOvie, asyncFetchCast, Active } from '../actions'
 import { useParams } from 'react-router-dom'
 import Rating from 'react-rating'
 import Container from '../components/Container'
@@ -10,6 +10,7 @@ import ModalVideo from 'react-modal-video'
 import Slick from '../components/Slick'
 import '../../node_modules/react-modal-video/scss/modal-video.scss';
 import Recommend from '../components/Recommended'
+import NothingIMG from '../assets/nothing.4c58037b.svg'
 
 const Movie = () => {
   const dispatch = useDispatch()
@@ -18,6 +19,7 @@ const Movie = () => {
   const [open, setOpen] = useState(false)
   useEffect(() => {
     dispatch(asyncFetchMOvie(param.id))
+    dispatch(Active(false))
     const time = setTimeout(() => {
       dispatch(asyncFetchCast(param.id))
       window.scroll({
@@ -28,15 +30,23 @@ const Movie = () => {
     }, 500)
     return () => clearTimeout(time)
   }, [dispatch, param.id])
+  
+  useEffect(() => {
+    document.title = `${!movie.original_title ? "Movie Library" : movie.original_title + "- Movie Library" }`
+  }, [movie])
 
   const viewTrailer = () => setOpen(true)
-
   return (
     <div className="movie">
       <Container>
         <div className="movie__main">
           <div className="movie__poster">
-            <img src={`${process.env.REACT_APP_LINKIMGW500}` + movie.poster_path} alt="img" />
+            {
+              movie.poster_path ?
+              <img src={`${process.env.REACT_APP_LINKIMGW500}` + movie.poster_path} alt="img" />
+              :
+              <img src={NothingIMG} alt="nothing__img" style={{ height: '35rem' }} />
+            }
           </div>
           <div className="movie__content">
             <h1 className="movie__title">{movie.original_title}</h1>

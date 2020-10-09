@@ -5,14 +5,16 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-const Slick = ({ slides }) => {
+const Slick = () => {
   const casts = useSelector(state => state.movie?.cast) || []
   const setting = {
     infinite: true,
     speed: 500,
-    slidesToShow: 10,
+    slidesToShow: Math.min(10, casts.length),
     slidesToScroll: 1,
-    autoplay: true
+    autoplay: true,
+    // centerMode: true,
+    // variableWidth: true
   }
   return (
     <Slider {...setting}>
