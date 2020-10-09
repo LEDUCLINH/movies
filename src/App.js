@@ -1,24 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-
+import React, { useEffect } from 'react';
+import { BrowserRouter as Router, Route} from 'react-router-dom'
+import SideBar from './components/Sidebar';
+import Discover from './pages/Discover';
+import './App.css'
+import Movie from './pages/Movie';
+import Person from './pages/Person';
+import Genre from './pages/Genre';
 function App() {
+  useEffect(() => {
+    window.scrollTo(x => {
+      console.log(x)
+    })
+  })
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router>
+        <SideBar />
+        <Route exact path="/" component={Discover} />
+        <Route exact path="/movie/:id" component={Movie} />
+        <Route exact path="/person/:id" component={Person} />
+        <Route exact path="/genres/:id" component={Genre} />
+      </Router>
     </div>
   );
 }

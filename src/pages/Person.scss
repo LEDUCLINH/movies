@@ -1,0 +1,36 @@
+.person {
+  width: 100%;
+  padding-top: 50px;
+  .person__main {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .person__img {
+      width: 30%;
+      img {
+        max-width: 400px;
+        width: 100%;
+        border-radius: 15px;
+        box-shadow: 0 14px 40px var(--shadow-dark);
+      }
+    }
+    .person__info {
+      width: 65%;
+      .person__name {
+        text-transform: uppercase;
+        font-weight: 100;
+        margin-bottom: 50px;
+      }
+      .person__birthday {
+        font-weight: 600;
+        font-size: .8rem;
+      }
+      .person__body {
+        .person__biography {
+          word-spacing: .3rem;
+          font-size: 1rem;
+        }
+      }
+    }
+  }
+}

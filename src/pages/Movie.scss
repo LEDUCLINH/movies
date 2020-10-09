@@ -1,0 +1,106 @@
+.movie {
+  width: 100%;
+  padding-top: 50px;
+  .movie__main {
+    display: flex;
+    justify-content: space-between;
+    .movie__poster {
+      width: 35%;
+      img {
+        max-width: 80%;
+        border-radius: 10px;
+        box-shadow: 0 14px 40px var(--shadow-dark);
+      }
+    }
+    .movie__content {
+      width: 65%;
+      .movie__title {
+        color: var(--color-primary-dark);
+        font-weight: 100;
+        font-size: 2.5rem;
+        letter-spacing: -2px;
+        margin: 0;
+      }
+      .movie__tagline {
+        color: var(--color-primary);
+        font-size: 1.2rem;
+        font-weight: 700;
+        text-transform: uppercase;
+      }
+      .movie__index {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .movie__time {
+          text-transform: uppercase;
+          font-size: .8rem;
+          span {
+            font-weight: 600;
+            color: var(--color-text-dark);
+            opacity: .6;
+          }
+        }
+        .movie__rating {
+          span {
+            margin-right: 2px;
+          }
+        }
+      }
+      .movie__genres {
+        .movie__genre {
+          color: var(--color-primary-light);
+          font-size: 1rem;
+          font-weight: 600;
+          margin-right: 15px;
+          cursor: pointer;
+        }
+      }
+      .item__title {
+        color: var(--color-primary-dark);
+        font-weight: 500;
+        font-size: 1.2rem;
+        font-weight: 600;
+        text-transform: uppercase;
+      }
+      .movie__synopsis {
+        .movie__synopsis--overview {
+          font-size: 1rem;
+          color: var(--color-text-dark);
+          word-spacing: 0.1rem;
+        }
+      }
+      .movie__casts {
+        margin-bottom: 50px;
+        .slick-slider {
+          max-width: 900px;
+          width: 100%;
+        }
+      }
+      .movie__action {
+        .movie__link {
+          background: transparent;
+          padding: 10px 30px;
+          border: 1px solid var(--color-primary-dark);
+          border-radius: 15px;
+          margin-right: 20px;
+          transition: all .3s ease-out;
+          cursor: pointer;
+          outline: none;
+          .fa {
+            margin-left: 10px;
+          }
+          &:hover {
+            background-color: var(--color-primary-dark);
+            color: #fff;
+            box-shadow: 0 0 1px 5px var(--color-primary-dark);
+            box-shadow: 0 14px 43px var(--shadow-dark);
+            transform: translateY(-5px);
+          }
+        }
+      }
+      .modal-video-close-btn {
+        cursor: pointer;
+      }
+    }
+  }
+}
