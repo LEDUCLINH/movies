@@ -10,14 +10,42 @@ const Slick = () => {
   const setting = {
     infinite: true,
     speed: 500,
-    slidesToShow: Math.min(10, casts.length),
-    slidesToScroll: 1,
+    slidesToShow: Math.min(8, casts.length),
+    slidesToScroll: 2,
     autoplay: true,
-    // centerMode: true,
-    // variableWidth: true
+    responsive: [
+      {
+        breakpoint: 1366,
+        settings: {
+          slidesToShow: Math.min(6, casts.length),
+          slidesToScroll: 2
+        }
+      },
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: Math.min(5, casts.length),
+          slidesToScroll: 2
+        }
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: Math.min(5, casts.length),
+          slidesToScroll: 2
+        }
+      },
+      {
+        breakpoint: 425,
+        settings: {
+          slidesToShow: Math.min(5, casts.length),
+          slidesToScroll: 2
+        }
+      }
+    ]
   }
   return (
-    <Slider {...setting}>
+    <Slider {...setting} >
       {casts.map(cast => (
         <div key={cast.id}>
           <Link to={`/person/${cast.id}`} className="cast__slick">

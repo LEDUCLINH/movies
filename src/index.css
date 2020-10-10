@@ -16,5 +16,6 @@ code {
   --color-primary-light: #546e7a;
   --color-text-dark: #444444;
   --shadow-dark: rgba(0,0,0,0.25);
-  --color-text-active: #23B2DC
+  --color-text-active: #23B2DC;
+  --color-header: #b0bec5;
 }

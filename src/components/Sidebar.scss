@@ -1,8 +1,8 @@
 .sidebar {
-  min-width: 300px;
-  max-width: 14%;
+  width: 300px;
   border-right: 1px solid rgba(0, 0, 0, 0.191);
   margin-top: 50px;
+  position: relative;
   .logo__page {
     width: 100%;
     text-align: center;
@@ -65,5 +65,53 @@
         border: 1px solid;
       }
     }
+  }
+  .sidebar__close {
+    display: none;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #ffffff;
+    font-size: 1.4rem;
+  }
+  @media screen and (max-width: 1024px) {
+    opacity: 0;
+    width: 0;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    background: rgb(38, 50, 56);
+    margin-top: 0;
+    transition: opacity .5s linear, width .6s linear;
+    position: fixed;
+    .logo__page {
+      display: none;
+    }
+    &.active {
+      pointer-events: visible;
+      width: 300px;
+      margin-top: 0;
+      opacity: 1;
+      z-index: 1100;
+    }
+    .sidebar__close {
+      display: inline-block;
+    }
+  }
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  z-index: -1;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, .3);
+  opacity: 0;
+  transition: opacity .4s linear;
+  &.active {
+    opacity: 1;
+    z-index: 1000;
   }
 }

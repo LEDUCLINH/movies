@@ -7,6 +7,7 @@ import personReducer from './person.reducer'
 import genreReducer from './genre.reducer'
 import activeReducer from './active.reducer'
 import loadReducer from './load.reducer'
+import barReducer from './bar.reducer'
 
 export default combineReducers({
     genRes: genResReducer,
@@ -16,5 +17,6 @@ export default combineReducers({
     person: personReducer,
     genre: genreReducer,
     active: activeReducer,
-    load: loadReducer
+    load: loadReducer,
+    bar: barReducer
 })

@@ -1,5 +1,5 @@
 .movie {
-  width: 100%;
+  width: calc(100% - 300px);
   padding-top: 50px;
   .movie__main {
     display: flex;
@@ -108,5 +108,8 @@
         cursor: pointer;
       }
     }
+  }
+  @media screen and (max-width: 1024px) {
+    width: 100%;
   }
 }

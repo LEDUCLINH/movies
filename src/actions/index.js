@@ -142,8 +142,14 @@ export const Active = (active) => {
   }
 }
 
-// export const resetLoad = () => {
-//   return {
-//     type: TYPES.RESETLOAD
-//   }
-// }
+export const open = () => {
+  return {
+    type: TYPES.OPEN
+  }
+}
+
+export const close = () => {
+  return {
+    type: TYPES.CLOSE
+  }
+}
