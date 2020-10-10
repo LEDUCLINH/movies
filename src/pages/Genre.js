@@ -11,6 +11,7 @@ const Genre = () => {
   const [page, setPage] = useState(1)
   const dispatch = useDispatch()
   const genre = useSelector(state => state.genre)
+  const load = useSelector(state => state.load)
   const param = useParams()
   useEffect(() => {
     dispatch(asyncFetchGenre(param.id, page))
@@ -20,6 +21,11 @@ const Genre = () => {
   useEffect(() => {
     setPage(1)
     setData([])
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    })
   }, [param.id])
 
   useEffect(() => {
@@ -46,7 +52,7 @@ const Genre = () => {
     <div className="genre">
       <Container>
         <div className="genre__main">
-          <ListFilm movies={data} />
+          <ListFilm movies={data} load={load} />
         </div>
       </Container>
     </div>

@@ -67,6 +67,9 @@
           font-size: 1rem;
           color: var(--color-text-dark);
           word-spacing: 0.1rem;
+          .react-loading-skeleton {
+            margin-bottom: 5px;
+          }
         }
       }
       .movie__casts {
@@ -96,6 +99,9 @@
             box-shadow: 0 14px 43px var(--shadow-dark);
             transform: translateY(-5px);
           }
+        }
+        .react-loading-skeleton {
+          margin-right: 20px;
         }
       }
       .modal-video-close-btn {

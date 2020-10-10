@@ -6,6 +6,7 @@ import './Recommend.scss'
 const Recommend = ({id}) => {
   const dispatch = useDispatch()
   const recommend = useSelector(state => state.recommend)
+  const load = useSelector(state => state.load)
   useEffect(() => {
     dispatch(asyncFetchMovieRecommend(id))
   }, [dispatch, id])
@@ -13,7 +14,7 @@ const Recommend = ({id}) => {
     <div className="movie__recommend">
       <h1 className="recommend__title">Recommend</h1>
       <h3 className="recommend__subtitle">Movies</h3>
-      <ListFilm movies={recommend} />
+      <ListFilm movies={recommend} load={load} />
     </div>
   )
 }

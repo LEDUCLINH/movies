@@ -25,13 +25,16 @@ const fetchDiscover = (data) => {
 
 export const asyncFetchDiscover = (page) => {
   return (dispatch) => {
+    dispatch({ type: TYPES.LOADING })
     return api.get('discover/movie', {
-     params: {
-       page: page
-     }
+      params: {
+        page: page
+      }
     }).then(res => {
       dispatch(fetchDiscover(res.data.results))
+      dispatch({ type: TYPES.LOADSUCCESS })
     })
+      .catch(() => dispatch({ type: TYPES.LOADERROR }))
   }
 }
 
@@ -44,13 +47,16 @@ const fetchMovie = (data) => {
 
 export const asyncFetchMOvie = (id) => {
   return (dispatch) => {
+    dispatch({ type: TYPES.LOADING })
     return api.get(`movie/${id}`, {
       params: {
         append_to_response: 'videos'
       }
     }).then(res => {
       dispatch(fetchMovie(res.data))
+      dispatch({ type: TYPES.LOADSUCCESS })
     })
+    .catch(() => dispatch({ type: TYPES.LOADERROR }) )
   }
 }
 
@@ -64,9 +70,9 @@ const fetchCast = (data) => {
 export const asyncFetchCast = (id) => {
   return (dispatch) => {
     return api.get(`movie/${id}/credits`)
-    .then(res => {
-      dispatch(fetchCast(res.data))
-    })
+      .then(res => {
+        dispatch(fetchCast(res.data))
+      })
   }
 }
 
@@ -79,10 +85,13 @@ const fetchMovieRecommend = (data) => {
 
 export const asyncFetchMovieRecommend = (id) => {
   return (dispatch) => {
+    dispatch({ type: TYPES.LOADING })
     return api.get(`movie/${id}/recommendations`)
-    .then(res => {
-      dispatch(fetchMovieRecommend(res.data.results))
-    })
+      .then(res => {
+        dispatch(fetchMovieRecommend(res.data.results))
+        dispatch({ type: TYPES.LOADSUCCESS })
+      })
+      .catch(() => dispatch({ type: TYPES.LOADERROR }))
   }
 }
 
@@ -93,12 +102,12 @@ const fetchPerson = (data) => {
   }
 }
 
-export const asyncFetchPerson= (id) => {
+export const asyncFetchPerson = (id) => {
   return (dispatch) => {
     return api.get(`person/${id}`)
-    .then(res => {
-      dispatch(fetchPerson(res.data))
-    })
+      .then(res => {
+        dispatch(fetchPerson(res.data))
+      })
   }
 }
 
@@ -111,22 +120,30 @@ const fetchGenre = (data) => {
 
 export const asyncFetchGenre = (genre__id, page__number) => {
   return (dispatch) => {
+    dispatch({ type: TYPES.LOADING })
     return api.get(`discover/movie`, {
       params: {
         with_genres: genre__id,
         page: page__number
       }
     })
-    .then(res => {
-      dispatch(fetchGenre(res.data.results))
-    })
+      .then(res => {
+        dispatch(fetchGenre(res.data.results))
+        dispatch({ type: TYPES.LOADSUCCESS })
+      })
+      .catch(() => dispatch({ type: TYPES.LOADERROR }))
   }
 }
 
 export const Active = (active) => {
-  console.log(active)
   return {
     type: TYPES.ACTIVE,
     active
   }
 }
+
+// export const resetLoad = () => {
+//   return {
+//     type: TYPES.RESETLOAD
+//   }
+// }

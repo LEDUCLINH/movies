@@ -6,6 +6,7 @@ import recommendReducer from './recommend.reducer'
 import personReducer from './person.reducer'
 import genreReducer from './genre.reducer'
 import activeReducer from './active.reducer'
+import loadReducer from './load.reducer'
 
 export default combineReducers({
     genRes: genResReducer,
@@ -14,5 +15,6 @@ export default combineReducers({
     recommend: recommendReducer,
     person: personReducer,
     genre: genreReducer,
-    active: activeReducer
+    active: activeReducer,
+    load: loadReducer
 })

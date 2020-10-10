@@ -7,6 +7,7 @@ import ListFilm from '../components/ListFilm'
 const Discover = () => {
   const [data, setData] = useState([])
   const discover = useSelector(state => state.discover)
+  const load = useSelector(state => state.load)
   const dispatch = useDispatch()
   const [page, setPage] = useState(1)
   useEffect(() => {
@@ -36,7 +37,7 @@ const Discover = () => {
     <div className="discover" onScroll={() => console.log('scroll')}>
       <h2 className="discover__title">POPULAR</h2>
       <p className="discover__subtitle">MOVIES</p>
-      <ListFilm movies={data} />
+      <ListFilm movies={data} load={load} />
     </div>
   )
 }

@@ -11,30 +11,31 @@ import Slick from '../components/Slick'
 import '../../node_modules/react-modal-video/scss/modal-video.scss';
 import Recommend from '../components/Recommended'
 import NothingIMG from '../assets/nothing.4c58037b.svg'
+import Skeleton from 'react-loading-skeleton'
 
 const Movie = () => {
   const dispatch = useDispatch()
   const param = useParams()
   const movie = useSelector(state => state.movie)
+  const load = useSelector(state => state.load)
   const [open, setOpen] = useState(false)
   useEffect(() => {
     dispatch(asyncFetchMOvie(param.id))
     dispatch(Active(false))
     const time = setTimeout(() => {
       dispatch(asyncFetchCast(param.id))
-      window.scroll({
-        top: 0,
-        left: 0,
-        behavior: 'smooth'
-      })
-    }, 500)
+    }, 200)
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    })
     return () => clearTimeout(time)
   }, [dispatch, param.id])
-  
-  useEffect(() => {
-    document.title = `${!movie.original_title ? "Movie Library" : movie.original_title + "- Movie Library" }`
-  }, [movie])
 
+  useEffect(() => {
+    document.title = `${!movie.original_title ? "Movie Library" : movie.original_title + "- Movie Library"}`
+  }, [movie])
   const viewTrailer = () => setOpen(true)
   return (
     <div className="movie">
@@ -42,51 +43,67 @@ const Movie = () => {
         <div className="movie__main">
           <div className="movie__poster">
             {
-              movie.poster_path ?
-              <img src={`${process.env.REACT_APP_LINKIMGW500}` + movie.poster_path} alt="img" />
-              :
-              <img src={NothingIMG} alt="nothing__img" style={{ height: '35rem' }} />
+              !load ?
+                (movie.poster_path ?
+                  <img src={`${process.env.REACT_APP_LINKIMGW500}` + movie.poster_path} alt="img" />
+                  :
+                  <img src={NothingIMG} alt="nothing__img" style={{ height: '35rem' }} />
+                ) : <Skeleton width={`80%`} height={`100%`} />
             }
           </div>
           <div className="movie__content">
-            <h1 className="movie__title">{movie.original_title}</h1>
-            <h3 className="movie__tagline">{movie.tagline}</h3>
+            <h1 className="movie__title">
+              {!load ? movie.original_title : <Skeleton width={`100%`} height={20} />}
+            </h1>
+            <h3 className="movie__tagline">
+              {!load ? movie.tagline : <Skeleton width={`50%`} height={10} />}
+            </h3>
             <div className="movie__index">
-              <Rating
-                initialRating={Math.round(movie.vote_average)}
-                readonly
-                stop={10}
-                step={2}
-                className="movie__rating"
-                emptySymbol={<Fontawesome name="empty" className="fa fa-star-o" />}
-                fullSymbol={<Fontawesome name="full" className="fa fa-star" />}
-              />
-              <div className="movie__time">
+              {
+                !load ? <Rating
+                  initialRating={Math.round(movie.vote_average)}
+                  readonly
+                  stop={10}
+                  step={2}
+                  className="movie__rating"
+                  emptySymbol={<Fontawesome name="empty" className="fa fa-star-o" />}
+                  fullSymbol={<Fontawesome name="full" className="fa fa-star" />}
+                /> : <Skeleton width={100} height={10} />
+              }
+              {!load ? <div className="movie__time">
                 {movie?.spoken_languages?.map((lg, index) => (
                   <span key={index}>{lg.name}</span>
                 ))}
                 <span>{' / ' + movie.runtime} MIN</span>
                 <span>{' / ' + movie?.release_date?.split("-")[0]}</span>
-              </div>
+              </div> : <Skeleton width={150} height={10} />}
             </div>
             <div className="movie__genres">
-              <h3 className="movie__genres--title item__title">The genres</h3>
-              {movie?.genres?.map(genre => (
+              <h3 className="movie__genres--title item__title">
+                {!load ? "The genres" : <Skeleton width={200} height={15} />}
+              </h3>
+              {!load ? movie?.genres?.map(genre => (
                 <span className="movie__genre" key={genre.id}>{genre.name}</span>
-              ))}
+              )) : <Skeleton width={200} height={10} />}
             </div>
             <div className="movie__synopsis">
-              <h3 className="movie_synopsis--title item__title">The synopsis</h3>
-              <p className="movie__synopsis--overview">{movie.overview}</p>
+              <h3 className="movie_synopsis--title item__title">
+                {!load ? "The synopsis" : <Skeleton width={200} height={15} />}
+              </h3>
+              <p className="movie__synopsis--overview">
+                {!load ? movie.overview : <Skeleton width={`100%`} height={10} count={5} style={{ display: 'flex', flexDirection: 'column'}} />}
+              </p>
             </div>
             <div className="movie__casts">
-              <h3 className="item__title movie__casts--title">The cast</h3>
-              <Slick />
+              <h3 className="item__title movie__casts--title">
+                {!load ? "The cast" : <Skeleton width={200} height={15} />}
+              </h3>
+              {!load ? <Slick /> : <Skeleton width={`80%`} height={40} /> }
             </div>
             <div className="movie__action">
-              <Button icon="fa fa-link" title="Website" />
-              <Button icon="fa fa-imdb" title="IMDB" />
-              <Button icon="fa fa-play" title="Trailer" onClick={viewTrailer} />
+              {!load ? <Button icon="fa fa-link" title="Website" /> : <Skeleton width={70} height={30} />}
+              {!load ? <Button icon="fa fa-imdb" title="IMDB" /> : <Skeleton width={70} height={30} />}
+              {!load ? <Button icon="fa fa-play" title="Trailer" onClick={viewTrailer} /> : <Skeleton width={70} height={30} />}
             </div>
             <ModalVideo
               channel="youtube"
@@ -104,7 +121,7 @@ const Movie = () => {
 
 const Button = (props) => {
   return (
-    <button 
+    <button
       className="movie__link"
       onClick={props.onClick}
     >
