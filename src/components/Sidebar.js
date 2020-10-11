@@ -49,7 +49,7 @@ const SideBar = () => {
         ))}
       </div>
       <div className="sidebar__close" onClick={handleClose}>
-        <i class="fa fa-times" aria-hidden="true"></i>
+        <i className="fa fa-times" aria-hidden="true"></i>
       </div>
     </div>
     <div className={`overlay ${bar ? "active" : "" }`} onClick={handleClose}></div>

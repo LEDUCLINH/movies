@@ -13,7 +13,7 @@ const Header = () => {
   return (
     <div className="header">
       <span className="header__bars" onClick={handleOpen}>
-        <i class="fa fa-bars fa-2x" aria-hidden="true"></i>
+        <i className="fa fa-bars fa-2x" aria-hidden="true"></i>
       </span>
     </div>
   )

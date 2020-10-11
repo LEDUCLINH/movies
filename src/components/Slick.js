@@ -8,17 +8,17 @@ import { Link } from 'react-router-dom';
 const Slick = () => {
   const casts = useSelector(state => state.movie?.cast) || []
   const setting = {
-    infinite: true,
+    // infinite: true,
     speed: 500,
     slidesToShow: Math.min(8, casts.length),
     slidesToScroll: 2,
     autoplay: true,
+    arrows: false,
     responsive: [
       {
-        breakpoint: 1366,
+        breakpoint: 1440,
         settings: {
-          slidesToShow: Math.min(6, casts.length),
-          slidesToScroll: 2
+          slidesToShow: Math.min(6, casts.length)
         }
       },
       {
@@ -38,8 +38,15 @@ const Slick = () => {
       {
         breakpoint: 425,
         settings: {
-          slidesToShow: Math.min(5, casts.length),
-          slidesToScroll: 2
+          slidesToShow: Math.min(4, casts.length),
+          slidesToScroll: 1
+        }
+      },
+      {
+        breakpoint: 375,
+        settings: {
+          slidesToShow: Math.min(3, casts.length),
+          slidesToScroll: 1
         }
       }
     ]

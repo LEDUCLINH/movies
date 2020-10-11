@@ -82,8 +82,8 @@
     pointer-events: none;
     background: rgb(38, 50, 56);
     margin-top: 0;
-    transition: opacity .5s linear, width .6s linear;
     position: fixed;
+    transition: opacity .5s linear, width .6s linear;
     .logo__page {
       display: none;
     }
@@ -110,8 +110,10 @@
   background: rgba(0, 0, 0, .3);
   opacity: 0;
   transition: opacity .4s linear;
-  &.active {
-    opacity: 1;
-    z-index: 1000;
+  @media screen and (max-width: 1024px) {
+    &.active {
+      opacity: 1;
+      z-index: 1000;
+    }
   }
 }

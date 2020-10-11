@@ -112,4 +112,48 @@
   @media screen and (max-width: 1024px) {
     width: 100%;
   }
+  @media screen and (max-width: 768px) {
+    .movie__main {
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      .movie__poster {
+        width: 100%;
+        margin: auto;
+        text-align: center;
+        img {
+          max-width: 70%;
+        }
+      }
+      .movie__content {
+        margin-top: 50px;
+        width: 100%;
+        font-size: 2rem;
+      }
+    }
+  }
+  @media screen and (max-width: 500px) {
+    .movie__main {
+      .movie__content {
+        .movie__title {
+          font-size: 1.5rem;
+        }
+        .movie__index {
+          .movie__rating {
+            span {
+              font-size: 1.2rem;
+            }
+          }
+        }
+        .movie__action {
+          .movie__link {
+            background: transparent;
+            padding: 5px 10px;
+            border-radius: 5px;
+            margin-right: 5px;
+          }
+        }
+      }
+    }
+  }
 }
