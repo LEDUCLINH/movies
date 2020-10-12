@@ -19,7 +19,7 @@ function App() {
           <Route exact path="/" component={Discover} />
           <Route exact path="/movie/:id" component={Movie} />
           <Route exact path="/person/:id" component={Person} />
-          <Route exact path="/genres/:id" component={Genre} />
+          <Route exact path="/genres/:genre" component={Genre} />
           <Route exact path="/search/:name" component={Search} />
         </div>
       </Router>

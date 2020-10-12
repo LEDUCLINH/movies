@@ -14,6 +14,11 @@ const Person = () => {
   useEffect(() => {
     dispatch(asyncFetchPerson(param.id))
   }, [dispatch, param.id])
+
+  useEffect(() => {
+    document.title = load ? person.name : "Movies - Library"
+  }, [person])
+
   return (
     <div className="person">
       <Container>

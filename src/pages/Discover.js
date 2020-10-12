@@ -10,6 +10,11 @@ const Discover = () => {
   const load = useSelector(state => state.load)
   const dispatch = useDispatch()
   const [page, setPage] = useState(1)
+
+  useEffect(() => {
+    document.title = `Discover - Movies`
+  }, [])
+
   useEffect(() => {
     dispatch(asyncFetchDiscover(page))
   }, [page, dispatch])

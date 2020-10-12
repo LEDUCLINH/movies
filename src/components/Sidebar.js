@@ -35,8 +35,8 @@ const SideBar = () => {
       <div className="sidebar__genres">
         {genres.map(genre => (
           <Link 
-            to={`/genres/${genre.id}`}
-            className={`sidebar__genre ${activeGl && ((active === genre.id) || (idCheck == genre.id)) && 'active'}`} 
+            to={`/genres/${genre.name}`}
+            className={`sidebar__genre ${activeGl && ((active === genre.id) || (idCheck == genre.name)) && 'active'}`} 
             key={genre.id} 
             onClick={() => {
               activeLink(genre.id)

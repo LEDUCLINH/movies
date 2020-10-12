@@ -9,14 +9,20 @@ import ListFilm from '../components/ListFilm'
 const Genre = () => {
   const [data, setData] = useState([])
   const [page, setPage] = useState(1)
+  const [idAction, setIdAction] = useState("")
   const dispatch = useDispatch()
   const genre = useSelector(state => state.genre)
+  const genres = useSelector(state => state.genRes)
   const load = useSelector(state => state.load)
   const param = useParams()
   useEffect(() => {
-    dispatch(asyncFetchGenre(param.id, page))
+    setIdAction(genres.find(genre => genre.name === param.genre)?.id)
+  }, [param.genre])
+
+  useEffect(() => {
+    dispatch(asyncFetchGenre(idAction, page))
     dispatch(Active(true))
-  }, [dispatch, param.id, page])
+  }, [dispatch, idAction, page])
 
   useEffect(() => {
     setPage(1)
@@ -25,7 +31,7 @@ const Genre = () => {
       top: 0,
       left: 0,
     })
-  }, [param.id])
+  }, [param.genre])
 
   useEffect(() => {
     setData(data => [...data, ...genre])
@@ -44,9 +50,8 @@ const Genre = () => {
   }, [page, pageLoad])
   
   useEffect(() => {
-    document.title = "Movies - Genre"
-  }, [])
-
+    document.title = `${param.genre} - Moives`
+  }, [param.genre])
   return (
     <div className="genre">
       <Container>
