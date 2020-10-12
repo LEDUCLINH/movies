@@ -1,12 +1,96 @@
 .header {
-  height: 60px;
-  background: var(--color-header);
+  padding: 15px 30px;
+  background: transparent;
   display: flex;
   align-items: center;
-  .header__bars {
-    margin-left: 30px;
-  }
+  justify-content: flex-end;
   position: sticky;
   top: 0;
-  z-index: 900;
+  z-index: 10;
+  .header__bars {
+    display: none;
+  }
+  .header__search {
+    form {
+      position: relative;
+      display: flex;
+      width: 0;
+      height: 0;
+      background: var(--color-primary);
+      box-shadow: 0 4px 8px var(--shadow-dark);
+      border-radius: 0;
+      padding: 20px;
+      border: 1px solid #000;
+      outline: none;
+      justify-content: center;
+      align-items: center;
+      border-radius: 20px;
+      transition: all .3s linear;
+      cursor: pointer;
+      button {
+        pointer-events: none;
+        text-align: center;
+        color: #ffffff;
+        outline: none;
+        background: transparent;
+        border: none;
+        padding: 0;
+        line-height: 1;
+        cursor: pointer;
+        &.open {
+          pointer-events: visible;
+        }
+      }
+      input {
+        width: 100%;
+        outline: none;
+        background: transparent;
+        border: none;
+        padding: 0;
+        color: #ffffff;
+        &::placeholder {
+          color: #ffffff;
+        }
+      }
+      &.open {
+        width: 250px;
+        cursor: initial;
+        input {
+          margin-left: 30px;
+        }
+        @media screen and (max-width: 425px) {
+          width: 150px;
+          input {
+            margin-left: 10px;
+          }
+        }
+      }
+    }
+  }
+  @media screen and (max-width: 1024px) {
+    background: var(--color-header);
+    justify-content: space-between;
+    .header__bars {
+      display: block;
+    }
+  }
+}
+
+.gotoTop {
+  width: 50px;
+  height: 50px;
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
+  z-index: 1200;
+  cursor: pointer;
+  font-size: 3rem;
+  text-align: center;
+  line-height: 50px;
+  color: var(--color-primary);
+  opacity: 0;
+  transition: opacity .3s linear;
+  &.visible {
+    opacity: 1;
+  }
 }

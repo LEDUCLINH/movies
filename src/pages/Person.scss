@@ -29,6 +29,9 @@
         .person__biography {
           word-spacing: .3rem;
           font-size: 1rem;
+          .react-loading-skeleton {
+            margin-bottom: 5px;
+          }
         }
       }
     }

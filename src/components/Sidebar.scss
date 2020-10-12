@@ -3,6 +3,7 @@
   border-right: 1px solid rgba(0, 0, 0, 0.191);
   margin-top: 50px;
   position: relative;
+  z-index: 100;
   .logo__page {
     width: 100%;
     text-align: center;
@@ -14,10 +15,12 @@
   .sidebar__genres {
     padding: 50px 15px;
     position: sticky;
+    width: 100%;
     top: -50px;
     .sidebar__genre {
       display: flex;
       justify-content: space-between;
+      width: 80%;
       border-radius: 15px;
       padding: 5px 10px;
       margin: 5px 0;
@@ -83,9 +86,14 @@
     background: rgb(38, 50, 56);
     margin-top: 0;
     position: fixed;
-    transition: opacity .5s linear, width .6s linear;
+    transition: all .3s linear;
     .logo__page {
       display: none;
+    }
+    .sidebar__genres {
+      .sidebar__genre {
+        color: #fff;
+      }
     }
     &.active {
       pointer-events: visible;

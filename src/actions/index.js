@@ -104,10 +104,13 @@ const fetchPerson = (data) => {
 
 export const asyncFetchPerson = (id) => {
   return (dispatch) => {
+    dispatch({ type: TYPES.LOADING })
     return api.get(`person/${id}`)
       .then(res => {
         dispatch(fetchPerson(res.data))
+        dispatch({ type: TYPES.LOADSUCCESS })
       })
+      .catch(() => dispatch({ type: TYPES.LOADERROR }))
   }
 }
 
@@ -151,5 +154,22 @@ export const open = () => {
 export const close = () => {
   return {
     type: TYPES.CLOSE
+  }
+}
+
+export const fetchSearch = (query, page) => {
+  return (dispatch) => {
+    dispatch({ type: TYPES.LOADING })
+    return api.get("search/movie", {
+      params: {
+        query,
+        page
+      }
+    })
+    .then(res => {
+      dispatch({ type: TYPES.FETCH_SEARCH, payload: res.data.results })
+      dispatch({ type: TYPES.LOADSUCCESS })
+    })
+    .catch(() => dispatch({ type: TYPES.LOADERROR }))
   }
 }

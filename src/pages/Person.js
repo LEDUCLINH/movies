@@ -4,12 +4,13 @@ import { asyncFetchPerson } from '../actions'
 import { useParams } from 'react-router-dom'
 import Container from '../components/Container'
 import './Person.scss'
+import Skeleton from 'react-loading-skeleton'
 
 const Person = () => {
   const dispatch = useDispatch()
   const param = useParams()
   const person = useSelector(state => state.person)
-  console.log(person)
+  const load = useSelector(state => state.load)
   useEffect(() => {
     dispatch(asyncFetchPerson(param.id))
   }, [dispatch, param.id])
@@ -18,18 +19,28 @@ const Person = () => {
       <Container>
         <div className="person__main">
           <div className="person__img">
-            {person.profile_path ?
+            {!load ? (person.profile_path ?
             <img src={process.env.REACT_APP_LINKIMG + person.profile_path} alt="img_person" />
             :
-            <img src="https://movies.fidalgo.dev/static/media/person.fdbc4613.svg" alt="img__person" />
+            <img src="https://movies.fidalgo.dev/static/media/person.fdbc4613.svg" alt="img__person" />)
+            :
+            <Skeleton height={500} width={`80%`} />
             }
           </div>
           <div className="person__info">
-            <h1 className="person__name">{person.name}</h1>
-            <p className="person__birthday">{person.birthday}</p>
+            <h1 className="person__name">
+              {!load ? person.name : <Skeleton width={`100%`} height={15} />}
+            </h1>
+            <p className="person__birthday">
+              {!load ? person.birthday : <Skeleton width={200} height={5} />}
+            </p>
             <div className="person__body">
-              <h3 className="person__body--title">The biography</h3>
-              <p className="person__biography">{person.biography || 'The is no biography avaible..'}</p>
+              <h3 className="person__body--title">
+                {!load ? "The biography" : <Skeleton width={200} height={10} />}
+              </h3>
+              <p className="person__biography">
+                {!load ? (person.biography || 'The is no biography avaible..') : <Skeleton width={`100%`} height={10} count={10} style={{ display: 'flex', flexDirection: "column"}} />}
+              </p>
             </div>
           </div>
         </div>

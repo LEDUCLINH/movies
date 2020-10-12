@@ -1,0 +1,16 @@
+.movie__search {
+  width: calc(100% - 300px);
+  padding-top: 50px;
+  .search__main {
+    .search__title {
+      font-size: 2rem;
+      .search__word {
+        font-size: 1.4rem;
+        margin-left: 20px;
+      }
+    }
+  }
+  @media screen and (max-width: 1024px) {
+    width: 100%;
+  }
+}

@@ -7,6 +7,7 @@ import Movie from './pages/Movie';
 import Person from './pages/Person';
 import Genre from './pages/Genre';
 import Header from './components/Header';
+import Search from './pages/Search';
 
 function App() {
   return (
@@ -14,11 +15,12 @@ function App() {
       <Router>
         <Header/>
         <div className="main">
-        <SideBar />
-        <Route exact path="/" component={Discover} />
-        <Route exact path="/movie/:id" component={Movie} />
-        <Route exact path="/person/:id" component={Person} />
-        <Route exact path="/genres/:id" component={Genre} />
+          <SideBar />
+          <Route exact path="/" component={Discover} />
+          <Route exact path="/movie/:id" component={Movie} />
+          <Route exact path="/person/:id" component={Person} />
+          <Route exact path="/genres/:id" component={Genre} />
+          <Route exact path="/search/:name" component={Search} />
         </div>
       </Router>
     </div>

@@ -24,7 +24,6 @@ const Genre = () => {
     window.scroll({
       top: 0,
       left: 0,
-      behavior: 'smooth'
     })
   }, [param.id])
 
