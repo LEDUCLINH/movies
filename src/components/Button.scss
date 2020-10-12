@@ -1,0 +1,15 @@
+.goback {
+	background: var(--color-goback);
+	cursor: pointer;
+	padding: 10px 50px;
+	outline: none;
+	border-radius: 20px;
+	border: none;
+	color: #ffffff;
+	// font-size: 1rem;
+	font-weight: lighter;
+	margin-top: 20px;
+	&:hover {
+			box-shadow: 0 4px 8px var(--shadow-dark);
+	}
+}

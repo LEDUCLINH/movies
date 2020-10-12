@@ -1,22 +1,28 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { asyncFetchPerson } from '../actions'
-import { useParams } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 import Container from '../components/Container'
 import './Person.scss'
 import Skeleton from 'react-loading-skeleton'
+import Button from '../components/Button'
 
 const Person = () => {
   const dispatch = useDispatch()
   const param = useParams()
   const person = useSelector(state => state.person)
   const load = useSelector(state => state.load)
+  const history = useHistory()
   useEffect(() => {
     dispatch(asyncFetchPerson(param.id))
   }, [dispatch, param.id])
 
   useEffect(() => {
     document.title = load ? person.name : "Movies - Library"
+    window.scroll({
+      top: 0,
+      left: 0
+    })
   }, [person])
 
   return (
@@ -47,6 +53,7 @@ const Person = () => {
                 {!load ? (person.biography || 'The is no biography avaible..') : <Skeleton width={`100%`} height={10} count={10} style={{ display: 'flex', flexDirection: "column"}} />}
               </p>
             </div>
+            <Button onGoback={() => history.goBack()} />
           </div>
         </div>
       </Container>

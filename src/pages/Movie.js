@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { asyncFetchMOvie, asyncFetchCast, Active } from '../actions'
-import { useParams } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 import Rating from 'react-rating'
 import Container from '../components/Container'
 import './Movie.scss'
@@ -12,10 +12,12 @@ import '../../node_modules/react-modal-video/scss/modal-video.scss';
 import Recommend from '../components/Recommended'
 import NothingIMG from '../assets/nothing.4c58037b.svg'
 import Skeleton from 'react-loading-skeleton'
+import ButtonBack from '../components/Button'
 
 const Movie = () => {
   const dispatch = useDispatch()
   const param = useParams()
+  const history = useHistory()
   const movie = useSelector(state => state.movie)
   const load = useSelector(state => state.load)
   const [open, setOpen] = useState(false)
@@ -104,6 +106,7 @@ const Movie = () => {
               {!load ? <Button icon="fa fa-imdb" title="IMDB" /> : <Skeleton width={70} height={30} />}
               {!load ? <Button icon="fa fa-play" title="Trailer" onClick={viewTrailer} /> : <Skeleton width={70} height={30} />}
             </div>
+            <ButtonBack onGoback={() => history.goBack()} />
             <ModalVideo
               channel="youtube"
               videoId={movie?.videos?.results[0]?.key}
