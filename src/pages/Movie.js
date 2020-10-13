@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { asyncFetchMOvie, asyncFetchCast, Active } from '../actions'
-import { useHistory, useParams } from 'react-router-dom'
+import { useHistory, useParams, Link } from 'react-router-dom'
 import Rating from 'react-rating'
 import Container from '../components/Container'
 import './Movie.scss'
@@ -60,17 +60,20 @@ const Movie = () => {
               {!load ? movie.tagline : <Skeleton width={`50%`} height={10} />}
             </h3>
             <div className="movie__index">
-              {
-                !load ? <Rating
-                  initialRating={Math.round(movie.vote_average)}
-                  readonly
-                  stop={10}
-                  step={2}
-                  className="movie__rating"
-                  emptySymbol={<Fontawesome name="empty" className="fa fa-star-o" />}
-                  fullSymbol={<Fontawesome name="full" className="fa fa-star" />}
-                /> : <Skeleton width={100} height={10} />
-              }
+              <div>
+                {
+                  !load ? <Rating
+                    initialRating={Math.round(movie.vote_average)}
+                    readonly
+                    stop={10}
+                    step={2}
+                    className="movie__rating"
+                    emptySymbol={<Fontawesome name="empty" className="fa fa-star-o" />}
+                    fullSymbol={<Fontawesome name="full" className="fa fa-star" />}
+                  /> : <Skeleton width={100} height={10} />
+                }
+                {!load && <span className="movie__vote_average">{movie.vote_average}</span>}
+              </div>
               {!load ? <div className="movie__time">
                 {movie?.spoken_languages?.map((lg, index) => (
                   <span key={index}>{lg.name}</span>
@@ -84,7 +87,9 @@ const Movie = () => {
                 {!load ? "The genres" : <Skeleton width={200} height={15} />}
               </h3>
               {!load ? movie?.genres?.map(genre => (
-                <span className="movie__genre" key={genre.id}>{genre.name}</span>
+                <Link className="movie__genre" to={`/genres/${genre.name}`}>
+                  <span key={genre.id}>{genre.name}</span>
+                </Link>
               )) : <Skeleton width={200} height={10} />}
             </div>
             <div className="movie__synopsis">
@@ -102,11 +107,11 @@ const Movie = () => {
               {!load ? <Slick /> : <Skeleton width={`80%`} height={40} /> }
             </div>
             <div className="movie__action">
-              {!load ? <Button icon="fa fa-link" title="Website" /> : <Skeleton width={70} height={30} />}
-              {!load ? <Button icon="fa fa-imdb" title="IMDB" /> : <Skeleton width={70} height={30} />}
+              {!load ? <Button icon="fa fa-link" title="Website" onClick={() => window.open(movie.homepage, "_blank")} /> : <Skeleton width={70} height={30} />}
+              {!load ? <Button icon="fa fa-imdb" title="IMDB" onClick={() => window.open(`https://imdb.com/title/${movie.imdb_id}`, "_blank")} /> : <Skeleton width={70} height={30} />}
               {!load ? <Button icon="fa fa-play" title="Trailer" onClick={viewTrailer} /> : <Skeleton width={70} height={30} />}
             </div>
-            <ButtonBack onGoback={() => history.goBack()} />
+            {!load ? <ButtonBack onGoback={() => history.goBack()} /> : <Skeleton height={30} width={100} style={{ marginTop: "30px" }} />}
             <ModalVideo
               channel="youtube"
               videoId={movie?.videos?.results[0]?.key}
@@ -121,14 +126,14 @@ const Movie = () => {
   )
 }
 
-const Button = (props) => {
+const Button = ({ onClick, title, icon }) => {
   return (
     <button
       className="movie__link"
-      onClick={props.onClick}
+      onClick={onClick}
     >
-      {props.title}
-      <i className={props.icon} aria-hidden="true"></i>
+      {title}
+      <i className={icon} aria-hidden="true"></i>
     </button>
   )
 }

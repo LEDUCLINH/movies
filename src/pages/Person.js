@@ -53,7 +53,10 @@ const Person = () => {
                 {!load ? (person.biography || 'The is no biography avaible..') : <Skeleton width={`100%`} height={10} count={10} style={{ display: 'flex', flexDirection: "column"}} />}
               </p>
             </div>
-            <Button onGoback={() => history.goBack()} />
+            <div className="person__action">
+              {!load ? <Button icon="fa fa-imdb" title="IMDB" onClick={() => window.open(`https://www.imdb.com/name/${person.imdb_id}`)} /> : <Skeleton height={30} width={100} /> }
+              {!load ? <Button icon="fa fa-long-arrow-left" title="Back" onClick={() => history.goBack()} /> : <Skeleton height={30} width={100} /> }
+            </div>
           </div>
         </div>
       </Container>

@@ -1,8 +1,11 @@
 import React from 'react'
 import './Button.scss'
 
-export default ({ onGoback }) => {
-    return (
-        <button className="goback" onClick={onGoback}>Back</button>
-    )
+export default ({ onClick, title, icon }) => {
+  return (
+    <button className="btn" onClick={onClick}>
+      <i className={icon} aria-hidden="true"></i>
+      {title}
+    </button>
+  )
 }  

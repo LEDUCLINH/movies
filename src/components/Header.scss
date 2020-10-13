@@ -4,8 +4,6 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  position: sticky;
-  top: 0;
   z-index: 10;
   .header__bars {
     display: none;
@@ -18,9 +16,7 @@
       height: 0;
       background: var(--color-primary);
       box-shadow: 0 4px 8px var(--shadow-dark);
-      border-radius: 0;
       padding: 20px;
-      border: 1px solid #000;
       outline: none;
       justify-content: center;
       align-items: center;
@@ -68,6 +64,8 @@
     }
   }
   @media screen and (max-width: 1024px) {
+    position: sticky;
+    top: 0;
     background: var(--color-header);
     justify-content: space-between;
     .header__bars {

@@ -1,15 +1,27 @@
-.goback {
+.btn {
 	background: var(--color-goback);
 	cursor: pointer;
-	padding: 10px 50px;
+	padding: 10px 30px;
 	outline: none;
 	border-radius: 20px;
 	border: none;
 	color: #ffffff;
-	// font-size: 1rem;
 	font-weight: lighter;
 	margin-top: 20px;
+	transition: all .4s linear;
+	border: 1px solid transparent;
+	margin-right: 20px;
 	&:hover {
 			box-shadow: 0 4px 8px var(--shadow-dark);
+			background: #ffffff;
+			color: #000000;
+			transform: translateY(-5px);
+			border: 1px solid var(--color-goback);
+	}
+	.fa {
+		margin-right: 10px;
+	}
+	&:last-child {
+		margin-right: 0;
 	}
 }
