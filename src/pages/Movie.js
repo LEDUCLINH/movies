@@ -111,7 +111,7 @@ const Movie = () => {
               {!load ? <Button icon="fa fa-imdb" title="IMDB" onClick={() => window.open(`https://imdb.com/title/${movie.imdb_id}`, "_blank")} /> : <Skeleton width={70} height={30} />}
               {!load ? <Button icon="fa fa-play" title="Trailer" onClick={viewTrailer} /> : <Skeleton width={70} height={30} />}
             </div>
-            {!load ? <ButtonBack onGoback={() => history.goBack()} /> : <Skeleton height={30} width={100} style={{ marginTop: "30px" }} />}
+            {!load ? <ButtonBack title="Back" icon="fa fa-long-arrow-left" onClick={() => history.goBack()} /> : <Skeleton height={30} width={100} style={{ marginTop: "30px" }} />}
             <ModalVideo
               channel="youtube"
               videoId={movie?.videos?.results[0]?.key}
