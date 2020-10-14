@@ -12,7 +12,7 @@ export const routes = [
   },
   {
     exact: true,
-    path: "/movie:id",
+    path: "/movie/:id",
     component: Movie
   },
   {
