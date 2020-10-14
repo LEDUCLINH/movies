@@ -17,9 +17,10 @@ const Genre = () => {
   const param = useParams()
   useEffect(() => {
     setIdAction(genres.find(genre => genre.name === param.genre)?.id)
-  }, [param.genre])
-
+  }, [genres, param.genre])
+  
   useEffect(() => {
+    if (!idAction) return
     dispatch(asyncFetchGenre(idAction, page))
     dispatch(Active(true))
   }, [dispatch, idAction, page])
@@ -32,7 +33,7 @@ const Genre = () => {
       left: 0,
     })
   }, [param.genre])
-
+  
   useEffect(() => {
     setData(data => [...data, ...genre])
   }, [genre])
