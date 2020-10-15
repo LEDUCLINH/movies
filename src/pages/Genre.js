@@ -44,12 +44,11 @@ const Genre = () => {
       setPage(page + 1)
     }
   }, [page])
-
+  
   useEffect(() => {
     window.addEventListener('scroll', pageLoad)
     return () => window.removeEventListener('scroll', pageLoad)
-  }, [page, pageLoad])
-  
+  }, [pageLoad])
   useEffect(() => {
     document.title = `${param.genre} - Moives`
   }, [param.genre])
